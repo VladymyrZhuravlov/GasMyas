@@ -26,7 +26,7 @@ public class Code extends AppCompatActivity implements View.OnClickListener {
     private TextView timer;
     private Button signin;
     private EditText code;
-    private Long phone;
+    private String phone;
     private AccessToken accessToken = new AccessToken();
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
@@ -44,7 +44,7 @@ public class Code extends AppCompatActivity implements View.OnClickListener {
         code = (EditText) findViewById(R.id.code);
         signin.setOnClickListener(this);
 
-        phone = getIntent().getExtras().getLong("phone");
+        phone = getIntent().getExtras().getString("phone");
 
 
         new CountDownTimer(180000, 1000) {
@@ -69,7 +69,7 @@ public class Code extends AppCompatActivity implements View.OnClickListener {
         signIn(phone, code.getText().toString());
     }
 
-    private void signIn(Long phone, String code) {
+    private void signIn(String phone, String code) {
         SignIn api = RetroClient.getApiServiceSignIn();
         Call<AccessToken> call = api.getTask(phone, code);
         call.enqueue(new Callback<AccessToken>() {
