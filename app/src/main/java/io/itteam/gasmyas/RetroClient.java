@@ -1,6 +1,7 @@
 package io.itteam.gasmyas;
 
 
+import io.itteam.gasmyas.rest.GetUser;
 import io.itteam.gasmyas.rest.PostRegistration;
 import io.itteam.gasmyas.rest.SignIn;
 import retrofit2.Retrofit;
@@ -23,6 +24,9 @@ public class RetroClient {
 
     public static SignIn getApiServiceSignIn() {
         return getRetrofitInstance().create(SignIn.class);
+    }
+    public static GetUser getUser() {
+        return getRetrofitInstance().create(GetUser.class);
     }
 
 }
