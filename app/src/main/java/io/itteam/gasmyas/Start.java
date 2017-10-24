@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.medialablk.easytoast.EasyToast;
+
 import io.itteam.gasmyas.json.PhoneNumber;
 import io.itteam.gasmyas.json.PostCode;
 import io.itteam.gasmyas.rest.PostRegistration;
@@ -52,11 +54,12 @@ public class Start extends AppCompatActivity {
             public void onResponse(Call<PostCode> call, Response<PostCode> response) {
                 if (response.isSuccessful()) {
                     Log.e("Lol Kek", "Code: " + response.body().getSmsCode());
+                    EasyToast.success(Start.this, response.body().getSmsCode(), Toast.LENGTH_LONG);
                     Intent intent = new Intent(Start.this, Code.class);
                     intent.putExtra("phone", phoneText);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(Start.this, "This phone " + phoneNum + " number is not allowed.", Toast.LENGTH_SHORT).show();
+                    EasyToast.error(Start.this, "This phone " + phoneNum + " number is not allowed.");
                 }
             }
 

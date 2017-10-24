@@ -28,4 +28,5 @@ public class PostCode{
 	public String getMessage(){
 		return message;
 	}
+
 }

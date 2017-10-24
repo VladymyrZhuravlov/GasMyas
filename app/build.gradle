@@ -30,4 +30,5 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.0.2'
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     compile 'org.glassfish:javax.annotation:10.0-b28'
+    compile 'com.github.IsPra94:EasyToast:1.0.0'
 }
