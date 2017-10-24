@@ -43,7 +43,7 @@ public class Start extends AppCompatActivity {
         });
     }
 
-    private void postCode(String phoneNum) {
+    private void postCode(final String phoneNum) {
         PhoneNumber phoneNumber = new PhoneNumber(phoneNum);
         PostRegistration api = RetroClient.getCode();
         Call<PostCode> call = api.getCode(phoneNumber);
@@ -56,7 +56,7 @@ public class Start extends AppCompatActivity {
                     intent.putExtra("phone", phoneText);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(Start.this, response.message(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Start.this, "This phone " + phoneNum + " number is not allowed.", Toast.LENGTH_SHORT).show();
                 }
             }
 

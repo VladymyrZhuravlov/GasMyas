@@ -2,9 +2,9 @@ package io.itteam.gasmyas;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import io.itteam.gasmyas.json.AccessToken;
@@ -81,7 +80,7 @@ public class Code extends AppCompatActivity implements View.OnClickListener {
                     if (accessToken.getStatusCode() == null) {
                         Toast.makeText(Code.this, "OK", Toast.LENGTH_SHORT).show();
                         editor = pref.edit();
-                        editor.putString("accessToken", accessToken.getAccessToken());
+                        editor.putString("accessToken", "Bearer " + accessToken.getAccessToken());
                         editor.apply();
                         Intent intent = new Intent(Code.this, ButtonClick.class);
                         startActivity(intent);
