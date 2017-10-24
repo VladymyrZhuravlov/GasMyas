@@ -1,6 +1,10 @@
 package io.itteam.gasmyas;
 
 
+import io.itteam.gasmyas.rest.PostRegistration;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class RetroClient {
 
     private static final String ROOT_URL = "http://192.168.9.220:44444";
@@ -12,8 +16,8 @@ public class RetroClient {
                 .build();
     }
 
-    public static GetRoute getRoute() {
-        return getRetrofitInstance().create(GetRoute.class);
+    public static PostRegistration getApiServiceRegistration() {
+        return getRetrofitInstance().create(PostRegistration.class);
     }
 
 }
