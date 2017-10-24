@@ -1,16 +1,25 @@
 package io.itteam.gasmyas;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import io.itteam.gasmyas.json.PhoneNumber;
+import io.itteam.gasmyas.json.PostCode;
+import io.itteam.gasmyas.rest.PostRegistration;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Start extends AppCompatActivity {
 
     private EditText phoneNumber;
     private Button getCodeBtn;
+    private String phoneText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +34,30 @@ public class Start extends AppCompatActivity {
                 switch (view.getId()){
                     case R.id.getCodeBtn:
                         Intent intent = new Intent(Start.this, Code.class);
-                        intent.putExtra("phone", "38" + phoneNumber.getText().toString());
+                        phoneText = "38" + phoneNumber.getText().toString();
+                        postCode(phoneText);
+                        intent.putExtra("phone", phoneText);
                         startActivity(intent);
                 }
+            }
+        });
+    }
+
+    private void postCode(String code) {
+        PhoneNumber phoneNumber = new PhoneNumber(code);
+        PostRegistration api = RetroClient.getCode();
+        Call<PostCode> call = api.getCode(phoneNumber);
+        call.enqueue(new Callback<PostCode>() {
+            @Override
+            public void onResponse(Call<PostCode> call, Response<PostCode> response) {
+                if (response.isSuccessful()) {
+                    Log.e("Lol Kek", "Code: " + response.body().getSmsCode());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PostCode> call, Throwable t) {
+                Log.e("Ye6a", t.getMessage());
             }
         });
     }

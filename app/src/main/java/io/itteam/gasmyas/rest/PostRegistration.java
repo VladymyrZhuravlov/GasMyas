@@ -9,6 +9,6 @@ import retrofit2.http.POST;
 
 public interface PostRegistration {
     @Headers({"Content-Type: application/json"})
-    @POST("/signup")
+    @POST("/signin")
     Call<PostCode> getCode(@Body PhoneNumber registrationBody);
 }

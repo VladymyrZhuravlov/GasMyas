@@ -13,4 +13,8 @@ public class PhoneNumber {
     public String getPhone(){
         return phone;
     }
+
+    public PhoneNumber(String phone){
+        this.phone = phone;
+    }
 }
