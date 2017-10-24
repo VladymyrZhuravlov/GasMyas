@@ -43,8 +43,8 @@ public class Start extends AppCompatActivity {
         });
     }
 
-    private void postCode(String code) {
-        PhoneNumber phoneNumber = new PhoneNumber(code);
+    private void postCode(String phoneNum) {
+        PhoneNumber phoneNumber = new PhoneNumber(phoneNum);
         PostRegistration api = RetroClient.getCode();
         Call<PostCode> call = api.getCode(phoneNumber);
         call.enqueue(new Callback<PostCode>() {
