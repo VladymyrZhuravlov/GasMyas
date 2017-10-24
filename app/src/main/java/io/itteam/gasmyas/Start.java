@@ -65,7 +65,6 @@ public class Start extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<PostCode> call, Throwable t) {
-                Log.e("Ye6a", t.getMessage());
             }
         });
     }

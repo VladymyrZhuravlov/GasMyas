@@ -94,7 +94,6 @@ public class Code extends AppCompatActivity implements View.OnClickListener {
 
             @Override
             public void onFailure(Call<AccessToken> call, Throwable t) {
-                Log.e("qwe", t.getMessage());
             }
         });
     }
