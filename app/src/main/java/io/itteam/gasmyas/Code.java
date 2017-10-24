@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.medialablk.easytoast.EasyToast;
+
 import java.util.concurrent.TimeUnit;
 
 import io.itteam.gasmyas.json.AccessToken;
@@ -77,18 +79,16 @@ public class Code extends AppCompatActivity implements View.OnClickListener {
             public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
                 if (response.isSuccessful()) {
                     accessToken = response.body();
-                    if (accessToken.getStatusCode() == null) {
                         Toast.makeText(Code.this, "OK", Toast.LENGTH_SHORT).show();
                         editor = pref.edit();
                         editor.putString("accessToken", "Bearer " + accessToken.getAccessToken());
                         editor.apply();
                         Intent intent = new Intent(Code.this, ButtonClick.class);
                         startActivity(intent);
-                    } else {
-                        Toast.makeText(Code.this, "FAIL", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(Code.this, Start.class);
-                        startActivity(intent);
-                    }
+                } else {
+                    EasyToast.error(Code.this, "Code no valid!");
+                    Intent intent = new Intent(Code.this, Start.class);
+                    startActivity(intent);
                 }
             }
 
