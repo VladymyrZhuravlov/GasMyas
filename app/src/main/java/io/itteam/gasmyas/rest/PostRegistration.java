@@ -1,7 +1,5 @@
 package io.itteam.gasmyas.rest;
 
-import io.itteam.travel.json.users.Response;
-import io.itteam.travel.json.users.ResponseUser;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Headers;

@@ -2,6 +2,7 @@ package io.itteam.gasmyas;
 
 
 import io.itteam.gasmyas.rest.PostRegistration;
+import io.itteam.gasmyas.rest.SignIn;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -18,6 +19,10 @@ public class RetroClient {
 
     public static PostRegistration getApiServiceRegistration() {
         return getRetrofitInstance().create(PostRegistration.class);
+    }
+
+    public static SignIn getApiServiceSignIn() {
+        return getRetrofitInstance().create(SignIn.class);
     }
 
 }

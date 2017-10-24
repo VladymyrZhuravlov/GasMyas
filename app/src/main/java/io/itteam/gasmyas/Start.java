@@ -25,6 +25,7 @@ public class Start extends AppCompatActivity {
                 switch (view.getId()){
                     case R.id.getCodeBtn:
                         Intent intent = new Intent(Start.this, Code.class);
+                        intent.putExtra("phone", "38" + phoneNumber.getText().toString());
                         startActivity(intent);
                 }
             }
