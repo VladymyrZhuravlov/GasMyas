@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import io.itteam.gasmyas.json.user.User;
@@ -26,6 +27,7 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
     private boolean isConnect = false;
     private ImageView statusImage;
     private EditText number;
+    private LinearLayout btnSection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,8 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
         number = (EditText)findViewById(R.id.numberSch);
         connectBtn = (Button) findViewById(R.id.connectBtn);
         statusImage = (ImageView) findViewById(R.id.statusImage);
+        btnSection = (LinearLayout) findViewById(R.id.btnSection);
+        btnSection.setVisibility(View.INVISIBLE);
         connectBtn.setOnClickListener(this);
         userText = (TextView) findViewById(R.id.userText);
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
@@ -62,25 +66,18 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
         });
     }
 
-    public void btnClick(){
-
-    }
-
     @Override
     public void onClick(View view) {
-        if (!number.getText().toString().equals("")) {
             if (isConnect) {
                 statusImage.setImageResource(R.drawable.round_error);
                 isConnect = false;
+                btnSection.setVisibility(View.INVISIBLE);
                 connectBtn.setText("Активировать");
             } else {
                 statusImage.setImageResource(R.drawable.round_success);
+                btnSection.setVisibility(View.VISIBLE);
                 isConnect = true;
                 connectBtn.setText("Деактивировать");
             }
-        } else {
-            EasyToast.error(ButtonClick.this, "Введите номер!!!");
-        }
-
     }
 }

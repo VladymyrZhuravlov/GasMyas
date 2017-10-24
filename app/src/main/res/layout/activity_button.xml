@@ -27,15 +27,14 @@
         android:id="@+id/statusImage"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginBottom="0dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="0dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/numberSch"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/numberSch"
         app:layout_constraintTop_toTopOf="@+id/numberSch"
-        app:srcCompat="@drawable/round_error" />
+        app:srcCompat="@drawable/round_error"
+        android:layout_marginStart="8dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -46,7 +45,8 @@
         android:orientation="horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numberSch">
+        app:layout_constraintTop_toBottomOf="@+id/numberSch"
+        android:id="@+id/linearLayout">
 
         <Button
             android:id="@+id/connectBtn"
@@ -67,7 +67,8 @@
         android:layout_marginTop="8dp"
         android:text="Вы вошли как:"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="8dp" />
 
     <TextView
         android:id="@+id/userText"
@@ -76,5 +77,45 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintLeft_toRightOf="@+id/textView3"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="8dp" />
+
+    <LinearLayout
+        android:id="@+id/btnSection"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.0">
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/ButtonStyle"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/ButtonStyle"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/ButtonStyle"
+            android:text="Button" />
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
