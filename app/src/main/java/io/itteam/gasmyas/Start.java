@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import io.itteam.gasmyas.json.PhoneNumber;
 import io.itteam.gasmyas.json.PostCode;
@@ -33,11 +34,10 @@ public class Start extends AppCompatActivity {
             public void onClick(View view) {
                 switch (view.getId()){
                     case R.id.getCodeBtn:
-                        Intent intent = new Intent(Start.this, Code.class);
+
                         phoneText = "38" + phoneNumber.getText().toString();
                         postCode(phoneText);
-                        intent.putExtra("phone", phoneText);
-                        startActivity(intent);
+
                 }
             }
         });
@@ -52,6 +52,11 @@ public class Start extends AppCompatActivity {
             public void onResponse(Call<PostCode> call, Response<PostCode> response) {
                 if (response.isSuccessful()) {
                     Log.e("Lol Kek", "Code: " + response.body().getSmsCode());
+                    Intent intent = new Intent(Start.this, Code.class);
+                    intent.putExtra("phone", phoneText);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(Start.this, response.message(), Toast.LENGTH_SHORT).show();
                 }
             }
 
