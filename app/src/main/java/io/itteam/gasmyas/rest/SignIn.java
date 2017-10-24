@@ -10,6 +10,6 @@ public interface SignIn {
 
     @Headers({"Content-Type: application/json"})
     @GET("/phone")
-    Call<AccessToken> getTask(@Query("phone") long phone, @Query("code") String code);
+    Call<AccessToken> getTask(@Query("phone") String phone, @Query("code") String code);
 
 }
