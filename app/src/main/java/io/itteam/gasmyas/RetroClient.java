@@ -17,7 +17,7 @@ public class RetroClient {
                 .build();
     }
 
-    public static PostRegistration getApiServiceRegistration() {
+    public static PostRegistration getCode() {
         return getRetrofitInstance().create(PostRegistration.class);
     }
 
