@@ -65,6 +65,7 @@ public class Start extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<PostCode> call, Throwable t) {
+                EasyToast.error(Start.this, t.toString());
             }
         });
     }

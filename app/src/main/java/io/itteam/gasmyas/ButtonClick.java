@@ -5,19 +5,18 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.util.Log;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.medialablk.easytoast.EasyToast;
 
 import io.itteam.gasmyas.json.user.User;
 import io.itteam.gasmyas.rest.GetUser;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import android.widget.ImageView;
-
-import com.medialablk.easytoast.EasyToast;
 
 public class ButtonClick extends AppCompatActivity implements View.OnClickListener {
 
@@ -61,7 +60,7 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Log.e("qwe", t.getMessage());
+                EasyToast.error(ButtonClick.this, t.toString());
             }
         });
     }

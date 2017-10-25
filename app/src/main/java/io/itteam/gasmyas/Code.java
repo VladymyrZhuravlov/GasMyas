@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -94,6 +93,7 @@ public class Code extends AppCompatActivity implements View.OnClickListener {
 
             @Override
             public void onFailure(Call<AccessToken> call, Throwable t) {
+                EasyToast.error(Code.this, t.toString());
             }
         });
     }
