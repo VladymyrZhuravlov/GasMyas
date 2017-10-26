@@ -30,6 +30,7 @@ public class Code extends AppCompatActivity implements View.OnClickListener {
     private AccessToken accessToken = new AccessToken();
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
+    private CountDownTimer countDownTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +47,7 @@ public class Code extends AppCompatActivity implements View.OnClickListener {
 
         phone = getIntent().getExtras().getString("phone");
 
-
-        new CountDownTimer(180000, 1000) {
+        countDownTimer = new CountDownTimer(180000, 1000) {
             public void onTick(long millisUntilFinished) {
                 timer.setText(""+String.format("%d мин, %d сек",
                         TimeUnit.MILLISECONDS.toMinutes( millisUntilFinished),
@@ -60,13 +60,12 @@ public class Code extends AppCompatActivity implements View.OnClickListener {
                 startActivity(intent);
             }
         }.start();
-
     }
 
     @Override
     public void onClick(View view) {
-
         signIn(phone, code.getText().toString());
+        countDownTimer.cancel();
     }
 
     private void signIn(String phone, String code) {
