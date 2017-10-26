@@ -1,6 +1,8 @@
 package io.itteam.gasmyas;
 
 
+import io.itteam.gasmyas.rest.GetActivated;
+import io.itteam.gasmyas.rest.GetDeactivated;
 import io.itteam.gasmyas.rest.GetUser;
 import io.itteam.gasmyas.rest.PostRegistration;
 import io.itteam.gasmyas.rest.SignIn;
@@ -24,6 +26,14 @@ public class RetroClient {
 
     public static SignIn getApiServiceSignIn() {
         return getRetrofitInstance().create(SignIn.class);
+    }
+
+    public static GetActivated getApiServiceGetActivated() {
+        return getRetrofitInstance().create(GetActivated.class);
+    }
+
+    public static GetDeactivated getApiServiceGetDeactivated() {
+        return getRetrofitInstance().create(GetDeactivated.class);
     }
     public static GetUser getUser() {
         return getRetrofitInstance().create(GetUser.class);

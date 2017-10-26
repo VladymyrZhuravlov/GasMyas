@@ -79,4 +79,6 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
                 connectBtn.setText("Деактивировать");
             }
     }
+
+
 }
