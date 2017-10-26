@@ -37,7 +37,7 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_button);
 
-        number = (EditText)findViewById(R.id.numberSch);
+        number = (EditText) findViewById(R.id.numberSch);
         connectBtn = (Button) findViewById(R.id.connectBtn);
         statusImage = (ImageView) findViewById(R.id.statusImage);
         btnSection = (LinearLayout) findViewById(R.id.btnSection);
@@ -48,6 +48,16 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
         token = pref.getString("accessToken", null);
 
         getUser();
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (!activator.isConnection()) {
+            activated(number.getText().toString(), token);
+        } else {
+            deactivated(number.getText().toString(), token);
+        }
     }
 
     private void getUser() {
@@ -67,15 +77,6 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
                 EasyToast.error(ButtonClick.this, t.toString());
             }
         });
-    }
-
-    @Override
-    public void onClick(View view) {
-        if (!activator.isConnection()) {
-            activated(number.getText().toString(), token);
-            } else {
-            deactivated(number.getText().toString(), token);
-            }
     }
 
     public void activated(String number, String token) {
