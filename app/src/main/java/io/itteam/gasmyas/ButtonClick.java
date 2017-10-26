@@ -3,6 +3,7 @@ package io.itteam.gasmyas;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -79,18 +80,20 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
         });
     }
 
-    public void activated(String number, String token) {
+    public void activated(String token, String number) {
         GetActivated api = RetroClient.getApiServiceGetActivated();
-        Call<Activator> call = api.activated(number, token);
+        Call<Activator> call = api.activated(token, number);
         call.enqueue(new Callback<Activator>() {
 
             @Override
             public void onResponse(Call<Activator> call, Response<Activator> response) {
                 if (response.isSuccessful()) {
+                    Log.d("", "onResponse: start");
                     activator = response.body();
                     statusImage.setImageResource(R.drawable.round_success);
                     btnSection.setVisibility(View.VISIBLE);
                     connectBtn.setText("Деактивировать");
+                    Log.d("", "onResponse: finish");
                 }
             }
 
@@ -102,9 +105,9 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
 
     }
 
-    public void deactivated(String number, String token) {
+    public void deactivated(String token, String number) {
         GetDeactivated api = RetroClient.getApiServiceGetDeactivated();
-        Call<Activator> call = api.deactivated(number, token);
+        Call<Activator> call = api.deactivated(token, number);
         call.enqueue(new Callback<Activator>() {
 
             @Override
