@@ -13,5 +13,5 @@ public interface GetDeactivated {
 
     @Headers({"Content-Type: application/json"})
     @GET("/api/v1/count/deactivated")
-    Call<Activator> getTask(@Header("Authorization") String v, @Query("count") String phone);
+    Call<Activator> deactivated(@Header("Authorization") String v, @Query("count") String phone);
 }

@@ -12,7 +12,10 @@ import android.widget.TextView;
 
 import com.medialablk.easytoast.EasyToast;
 
+import io.itteam.gasmyas.json.activated.Activator;
 import io.itteam.gasmyas.json.user.User;
+import io.itteam.gasmyas.rest.GetActivated;
+import io.itteam.gasmyas.rest.GetDeactivated;
 import io.itteam.gasmyas.rest.GetUser;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,6 +30,7 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
     private ImageView statusImage;
     private EditText number;
     private LinearLayout btnSection;
+    private Activator activator = new Activator();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,17 +71,57 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
-            if (isConnect) {
-                statusImage.setImageResource(R.drawable.round_error);
-                isConnect = false;
-                btnSection.setVisibility(View.INVISIBLE);
-                connectBtn.setText("Активировать");
+        if (!activator.isConnection()) {
+            activated(number.getText().toString(), token);
             } else {
-                statusImage.setImageResource(R.drawable.round_success);
-                btnSection.setVisibility(View.VISIBLE);
-                isConnect = true;
-                connectBtn.setText("Деактивировать");
+            deactivated(number.getText().toString(), token);
             }
+    }
+
+    public void activated(String number, String token) {
+        GetActivated api = RetroClient.getApiServiceGetActivated();
+        Call<Activator> call = api.activated(number, token);
+        call.enqueue(new Callback<Activator>() {
+
+            @Override
+            public void onResponse(Call<Activator> call, Response<Activator> response) {
+                if (response.isSuccessful()) {
+                    activator = response.body();
+                    statusImage.setImageResource(R.drawable.round_success);
+                    btnSection.setVisibility(View.VISIBLE);
+                    connectBtn.setText("Деактивировать");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Activator> call, Throwable t) {
+                EasyToast.error(ButtonClick.this, t.toString());
+            }
+        });
+
+    }
+
+    public void deactivated(String number, String token) {
+        GetDeactivated api = RetroClient.getApiServiceGetDeactivated();
+        Call<Activator> call = api.deactivated(number, token);
+        call.enqueue(new Callback<Activator>() {
+
+            @Override
+            public void onResponse(Call<Activator> call, Response<Activator> response) {
+                if (response.isSuccessful()) {
+                    activator = response.body();
+                    statusImage.setImageResource(R.drawable.round_warning);
+                    btnSection.setVisibility(View.INVISIBLE);
+                    connectBtn.setText("Активировать");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Activator> call, Throwable t) {
+                EasyToast.error(ButtonClick.this, t.toString());
+            }
+        });
+
     }
 
 

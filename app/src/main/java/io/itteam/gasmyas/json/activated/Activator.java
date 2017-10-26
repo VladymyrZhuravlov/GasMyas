@@ -50,4 +50,8 @@ public class Activator {
     public int getStatusCode() {
         return statusCode;
     }
+
+    public Activator() {
+        this.connection = false;
+    }
 }
