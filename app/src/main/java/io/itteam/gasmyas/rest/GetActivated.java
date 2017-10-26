@@ -12,6 +12,6 @@ public interface GetActivated {
 
     @Headers({"Content-Type: application/json"})
     @GET("/api/v1/count/activated")
-    Call<Activator> getTask(@Header("Authorization") String v, @Query("count") String phone);
+    Call<Activator> activated(@Header("Authorization") String v, @Query("count") String phone);
 
 }
