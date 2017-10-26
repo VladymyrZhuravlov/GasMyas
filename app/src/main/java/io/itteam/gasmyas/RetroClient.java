@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetroClient {
 
-    private static final String ROOT_URL = "http://83.218.236.146:44444";
+    private static final String ROOT_URL = "http://192.168.9.220:44444";
 
     private static Retrofit getRetrofitInstance() {
         return new Retrofit.Builder()

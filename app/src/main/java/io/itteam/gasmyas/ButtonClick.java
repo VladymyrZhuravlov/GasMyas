@@ -55,9 +55,13 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View view) {
         if (!activator.isConnection()) {
-            activated(number.getText().toString(), token);
+            Log.e("", "onResponse: active");
+            statusImage.setImageResource(R.drawable.round_warning);
+            activated(token, number.getText().toString());
         } else {
-            deactivated(number.getText().toString(), token);
+            Log.e("", "onResponse: deactive");
+            statusImage.setImageResource(R.drawable.round_warning);
+            deactivated(token, number.getText().toString());
         }
     }
 
@@ -114,7 +118,7 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
             public void onResponse(Call<Activator> call, Response<Activator> response) {
                 if (response.isSuccessful()) {
                     activator = response.body();
-                    statusImage.setImageResource(R.drawable.round_warning);
+                    statusImage.setImageResource(R.drawable.round_error);
                     btnSection.setVisibility(View.INVISIBLE);
                     connectBtn.setText("Активировать");
                 }
