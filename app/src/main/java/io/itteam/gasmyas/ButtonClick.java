@@ -1,9 +1,9 @@
 package io.itteam.gasmyas;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,7 +26,7 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
 
     private TextView userText;
     private String token;
-    private Button connectBtn;
+    private Button connectBtn, btnLogOut;
     private boolean isConnect = false;
     private ImageView statusImage;
     private EditText number;
@@ -40,12 +40,14 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
 
         number = (EditText) findViewById(R.id.numberSch);
         connectBtn = (Button) findViewById(R.id.connectBtn);
+        btnLogOut = (Button) findViewById(R.id.btnLogOut);
         statusImage = (ImageView) findViewById(R.id.statusImage);
         btnSection = (LinearLayout) findViewById(R.id.btnSection);
         btnSection.setVisibility(View.INVISIBLE);
         connectBtn.setOnClickListener(this);
+        btnLogOut.setOnClickListener(this);
         userText = (TextView) findViewById(R.id.userText);
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("GasMyasPref", 0);
         token = pref.getString("accessToken", null);
 
         getUser();
@@ -54,14 +56,22 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
-        if (!activator.isConnection()) {
-            Log.e("", "onResponse: active");
-            statusImage.setImageResource(R.drawable.round_warning);
-            activated(token, number.getText().toString());
-        } else {
-            Log.e("", "onResponse: deactive");
-            statusImage.setImageResource(R.drawable.round_warning);
-            deactivated(token, number.getText().toString());
+        switch (view.getId()){
+            case R.id.connectBtn:
+                if (!activator.isConnection()) {
+                    statusImage.setImageResource(R.drawable.round_warning);
+                    activated(token, number.getText().toString());
+                } else {
+                    statusImage.setImageResource(R.drawable.round_warning);
+                    deactivated(token, number.getText().toString());
+                }
+                break;
+            case R.id.btnLogOut:
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("GasMyasPref", 0);
+                pref.edit().putString("accessToken", null).apply();
+                Intent intent = new Intent(ButtonClick.this, Start.class);
+                startActivity(intent);
+                break;
         }
     }
 
@@ -72,6 +82,12 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
 
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
+                if(response.message().equals("Unauthorized")){
+                    SharedPreferences pref = getApplicationContext().getSharedPreferences("GasMyasPref", 0);
+                    pref.edit().putString("accessToken", null).apply();
+                    Intent intent = new Intent(ButtonClick.this, Start.class);
+                    startActivity(intent);
+                }
                 if (response.isSuccessful()) {
                     userText.setText(response.body().getOwner().getUsername());
                 }
@@ -92,12 +108,10 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onResponse(Call<Activator> call, Response<Activator> response) {
                 if (response.isSuccessful()) {
-                    Log.d("", "onResponse: start");
                     activator = response.body();
                     statusImage.setImageResource(R.drawable.round_success);
                     btnSection.setVisibility(View.VISIBLE);
                     connectBtn.setText("Деактивировать");
-                    Log.d("", "onResponse: finish");
                 }
             }
 
@@ -132,5 +146,9 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
 
     }
 
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
 }

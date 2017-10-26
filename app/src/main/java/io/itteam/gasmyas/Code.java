@@ -37,7 +37,7 @@ public class Code extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_code);
 
-        pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        pref = getApplicationContext().getSharedPreferences("GasMyasPref", 0); // 0 - for private mode
 
 
         timer = (TextView) findViewById(R.id.timer);
@@ -79,7 +79,7 @@ public class Code extends AppCompatActivity implements View.OnClickListener {
                     accessToken = response.body();
                         Toast.makeText(Code.this, "OK", Toast.LENGTH_SHORT).show();
                         editor = pref.edit();
-                        editor.putString("accessToken", "Bearer " + accessToken.getAccessToken());
+                        editor.putString("accessToken", "Bearer " + accessToken.getAccessToken() );
                         editor.apply();
                         Intent intent = new Intent(Code.this, ButtonClick.class);
                         startActivity(intent);
@@ -95,5 +95,10 @@ public class Code extends AppCompatActivity implements View.OnClickListener {
                 EasyToast.error(Code.this, t.toString());
             }
         });
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
     }
 }

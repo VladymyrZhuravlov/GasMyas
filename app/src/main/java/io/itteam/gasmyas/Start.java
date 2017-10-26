@@ -1,6 +1,7 @@
 package io.itteam.gasmyas;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -29,6 +30,7 @@ public class Start extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
+        ifTokenExist();
         phoneNumber = (EditText) findViewById(R.id.phoneNumber);
         getCodeBtn = (Button) findViewById(R.id.getCodeBtn);
         getCodeBtn.setOnClickListener(new View.OnClickListener() {
@@ -68,5 +70,18 @@ public class Start extends AppCompatActivity {
                 EasyToast.error(Start.this, t.toString());
             }
         });
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
+    private void ifTokenExist(){
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("GasMyasPref", 0);
+
+        if (pref.getString("accessToken", null) != null){
+            Intent intent = new Intent(Start.this, ButtonClick.class);
+            startActivity(intent);
+        }
     }
 }
