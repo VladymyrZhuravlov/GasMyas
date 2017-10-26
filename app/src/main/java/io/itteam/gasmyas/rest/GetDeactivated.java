@@ -1,8 +1,6 @@
 package io.itteam.gasmyas.rest;
 
-
 import io.itteam.gasmyas.json.activated.Activator;
-import io.itteam.gasmyas.json.user.User;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;

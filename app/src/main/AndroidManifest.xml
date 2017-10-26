@@ -23,7 +23,9 @@
         <activity
             android:name=".Code"
             android:windowSoftInputMode="stateVisible" />
-        <activity android:name=".ButtonClick" />
+        <activity
+            android:name=".ButtonClick"
+            android:windowSoftInputMode="stateVisible" />
         <activity android:name=".Resalt"></activity>
     </application>
 
