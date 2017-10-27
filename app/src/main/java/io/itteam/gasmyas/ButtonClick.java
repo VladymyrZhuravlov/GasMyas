@@ -1,9 +1,11 @@
 package io.itteam.gasmyas;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,7 +28,7 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
 
     private TextView userText;
     private String token;
-    private Button connectBtn, btnLogOut;
+    private Button connectBtn, btnLogOut, btnShow1, deconnectBtn;
     private boolean isConnect = false;
     private ImageView statusImage;
     private EditText number;
@@ -40,15 +42,20 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
 
         number = (EditText) findViewById(R.id.numberSch);
         connectBtn = (Button) findViewById(R.id.connectBtn);
+        deconnectBtn = (Button) findViewById(R.id.deconnectBtn);
         btnLogOut = (Button) findViewById(R.id.btnLogOut);
         statusImage = (ImageView) findViewById(R.id.statusImage);
         btnSection = (LinearLayout) findViewById(R.id.btnSection);
+        btnShow1 = (Button) findViewById(R.id.btnShow1);
         btnSection.setVisibility(View.INVISIBLE);
         connectBtn.setOnClickListener(this);
+        deconnectBtn.setOnClickListener(this);
+        btnShow1.setOnClickListener(this);
         btnLogOut.setOnClickListener(this);
         userText = (TextView) findViewById(R.id.userText);
         SharedPreferences pref = getApplicationContext().getSharedPreferences("GasMyasPref", 0);
         token = pref.getString("accessToken", null);
+        Log.e("Lol kek", token);
 
         getUser();
 
@@ -66,11 +73,19 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
                     deactivated(token, number.getText().toString());
                 }
                 break;
+            case R.id.deconnectBtn:
+                    statusImage.setImageResource(R.drawable.round_warning);
+                    deactivated(token, number.getText().toString());
+                break;
             case R.id.btnLogOut:
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("GasMyasPref", 0);
                 pref.edit().putString("accessToken", null).apply();
                 Intent intent = new Intent(ButtonClick.this, Start.class);
                 startActivity(intent);
+                break;
+            case R.id.btnShow1:
+                Intent intent1 = new Intent(ButtonClick.this, Resalt.class);
+                startActivity(intent1);
                 break;
         }
     }
@@ -101,12 +116,19 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
     }
 
     public void activated(String token, String number) {
-        GetActivated api = RetroClient.getApiServiceGetActivated();
+        final ProgressDialog dialog;
+
+        dialog = new ProgressDialog(ButtonClick.this);
+        dialog.setTitle(getString(R.string.download));
+        dialog.setMessage(getString(R.string.download));
+        dialog.show();
+        GetActivated api = RetroClientResalt.getApiServiceGetActivated();
         Call<Activator> call = api.activated(token, number);
         call.enqueue(new Callback<Activator>() {
 
             @Override
             public void onResponse(Call<Activator> call, Response<Activator> response) {
+                dialog.dismiss();
                 if (response.isSuccessful()) {
                     activator = response.body();
                     statusImage.setImageResource(R.drawable.round_success);
@@ -124,12 +146,19 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
     }
 
     public void deactivated(String token, String number) {
-        GetDeactivated api = RetroClient.getApiServiceGetDeactivated();
+        final ProgressDialog dialog;
+
+        dialog = new ProgressDialog(ButtonClick.this);
+        dialog.setTitle(getString(R.string.download));
+        dialog.setMessage(getString(R.string.download));
+        dialog.show();
+        GetDeactivated api = RetroClientResalt.getApiServiceGetDeactivated();
         Call<Activator> call = api.deactivated(token, number);
         call.enqueue(new Callback<Activator>() {
 
             @Override
             public void onResponse(Call<Activator> call, Response<Activator> response) {
+                dialog.dismiss();
                 if (response.isSuccessful()) {
                     activator = response.body();
                     statusImage.setImageResource(R.drawable.round_error);
@@ -146,9 +175,4 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
 
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        finish();
-    }
 }

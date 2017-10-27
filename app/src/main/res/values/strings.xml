@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">GasMyas</string>
+    <string name="show">Показать данные</string>
+    <string name="download">Загрузка</string>
 </resources>

@@ -25,8 +25,12 @@
             android:windowSoftInputMode="stateVisible" />
         <activity
             android:name=".ButtonClick"
-            android:windowSoftInputMode="stateVisible" />
-        <activity android:name=".Resalt"></activity>
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible"/>
+        <activity android:name=".Resalt"
+            android:parentActivityName=".ButtonClick"
+            android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>

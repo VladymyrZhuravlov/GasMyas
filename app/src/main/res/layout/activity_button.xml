@@ -54,6 +54,14 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:text="Активировать" />
+        <Button
+            android:id="@+id/deconnectBtn"
+            style="@style/ButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="Деактивировать" />
     </LinearLayout>
 
     <TextView
@@ -95,28 +103,13 @@
         app:layout_constraintVertical_bias="0.0">
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btnShow1"
             style="@style/ButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Button" />
+            android:text="@string/show" />
 
-        <Button
-            android:id="@+id/button4"
-            style="@style/ButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="Button" />
-
-        <Button
-            android:id="@+id/button2"
-            style="@style/ButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="Button" />
     </LinearLayout>
 
     <Button
