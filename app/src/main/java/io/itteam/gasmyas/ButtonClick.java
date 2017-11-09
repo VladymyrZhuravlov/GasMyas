@@ -4,14 +4,19 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.medialablk.easytoast.EasyToast;
 
@@ -26,7 +31,7 @@ import retrofit2.Response;
 
 public class ButtonClick extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView userText;
+    private TextView userText, seekText;
     private String token;
     private Button connectBtn, btnLogOut, btnShow1, deconnectBtn;
     private boolean isConnect = false;
@@ -34,6 +39,13 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
     private EditText number;
     private LinearLayout btnSection;
     private Activator activator = new Activator();
+    private Spinner putSpinner, getSpinner;
+    //    private SeekBar seekBar;
+    private ConstraintLayout test;
+    private ConstraintLayout timeZone;
+    private int cooficient = 0;
+    private double doubleCooficient = 0;
+    private boolean standart = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,17 +59,90 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
         statusImage = (ImageView) findViewById(R.id.statusImage);
         btnSection = (LinearLayout) findViewById(R.id.btnSection);
         btnShow1 = (Button) findViewById(R.id.btnShow1);
-        btnSection.setVisibility(View.INVISIBLE);
+        putSpinner = (Spinner) findViewById(R.id.putSpinner);
+        getSpinner = (Spinner) findViewById(R.id.getSpinner);
+//        seekBar = (SeekBar) findViewById(R.id.seekBar);
+        test = (ConstraintLayout) findViewById(R.id.test);
+        timeZone = (ConstraintLayout) findViewById(R.id.timeZone);
+//        btnSection.setVisibility(View.INVISIBLE);
         connectBtn.setOnClickListener(this);
         deconnectBtn.setOnClickListener(this);
         btnShow1.setOnClickListener(this);
         btnLogOut.setOnClickListener(this);
         userText = (TextView) findViewById(R.id.userText);
+        seekText = (TextView) findViewById(R.id.seekText);
         SharedPreferences pref = getApplicationContext().getSharedPreferences("GasMyasPref", 0);
         token = pref.getString("accessToken", null);
-        Log.e("Lol kek", token);
+//        Log.e("Lol kek", token);
 
-        getUser();
+//        seekBar.setOnSeekBarChangeListener(this);
+
+
+//        putSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            public void onItemSelected(AdapterView<?> parent, View itemSelected, int selectedItemPosition, long selectedId) {
+//                String[] choose = getResources().getStringArray(R.array.commands);
+//                switch (choose[selectedItemPosition]){
+//                    case "---":
+//                        test.setVisibility(View.GONE);
+//                        timeZone.setVisibility(View.GONE);
+//                        break;
+//                    case "КОЛ. ЗНАКОВ ОКРУГЛЕНИЯ":
+//                        standart = true;
+//                        cooficient=0;
+//                        test.setVisibility(View.VISIBLE);
+//                        timeZone.setVisibility(View.GONE);
+//                        seekBar.setMax(4);
+//                        break;
+//                    case "МОЛ. КОН-ЦИЯ УГЛ ГАЗА (%)":
+//                        standart = true;
+//                        cooficient=0;
+//                        test.setVisibility(View.VISIBLE);
+//                        timeZone.setVisibility(View.GONE);
+//                        seekBar.setMax(15);
+//                        break;
+//                    case "МОЛ. КОН-ЦИЯ АЗОТА (%)":
+//                        standart = true;
+//                        cooficient=0;
+//                        test.setVisibility(View.VISIBLE);
+//                        timeZone.setVisibility(View.GONE);
+//                        seekBar.setMax(15);
+//                        break;
+//                    case "РАСЧЕТНЫЙ ЧАС ДЛЯ ПОЧАСОВКИ":
+//                        standart = true;
+//                        cooficient = 1;
+//                        test.setVisibility(View.VISIBLE);
+//                        timeZone.setVisibility(View.GONE);
+//                        seekBar.setMax(23);
+//                        break;
+//                    case "НОВАЯ ДАТА":
+//                        standart = true;
+//                        test.setVisibility(View.GONE);
+//                        timeZone.setVisibility(View.VISIBLE);
+//                        break;
+//                    case "НОВОЕ ВРЕМЯ":
+//                        standart = true;
+//                        test.setVisibility(View.GONE);
+//                        timeZone.setVisibility(View.VISIBLE);
+//                        break;
+//                    case "ПЛОТНОСТЬ ГАЗА":
+//                        standart = false;
+//                        doubleCooficient = 0.66;
+//                        test.setVisibility(View.VISIBLE);
+//                        timeZone.setVisibility(View.GONE);
+//                        seekBar.setMax(14);
+//                        break;
+//                    default:
+//                        test.setVisibility(View.GONE);
+//                        timeZone.setVisibility(View.GONE);
+//                        break;
+//                }
+//
+//            }
+//            public void onNothingSelected(AdapterView<?> parent) {
+//            }
+//        });
+
+//        getUser();
 
     }
 
@@ -175,4 +260,23 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
 
     }
 
+//    @Override
+//    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+//        if (standart){
+//            seekText.setText(String.valueOf( seekBar.getProgress()+ cooficient));
+//        }else {
+//            seekText.setText(String.format("%.2f", ((double) seekBar.getProgress()/100)+ doubleCooficient));
+//        }
+//    }
+//
+//    @Override
+//    public void onStartTrackingTouch(SeekBar seekBar) {
+//
+//    }
+//
+//    @Override
+//    public void onStopTrackingTouch(SeekBar seekBar) {
+//
+//
+//    }
 }

@@ -2,4 +2,19 @@
     <string name="app_name">GasMyas</string>
     <string name="show">Показать данные</string>
     <string name="download">Загрузка</string>
+
+    <string-array name="commands">
+        <item>---</item>
+        <item>КОЛ. ЗНАКОВ ОКРУГЛЕНИЯ</item>
+        <item>МОЛ. КОН-ЦИЯ УГЛ ГАЗА (%)</item>
+        <item>МОЛ. КОН-ЦИЯ АЗОТА (%)</item>
+        <item>НОВАЯ ДАТА</item>
+        <item>НОВОЕ ВРЕМЯ</item>
+        <item>ПЕЧАТЬ ВЕДОМОСТИ ПО … ЧИСЛО</item>
+        <item>ПЕЧАТЬ ВЕДОМОСТИ С … ЧИСЛА</item>
+        <item>ПЕЧАТЬ ПОЧАСОВКИ ЗА … (ИЗ 200)</item>
+        <item>ПЛОТНОСТЬ ГАЗА</item>
+        <item>РАСЧЕТНЫЙ ЧАС ДЛЯ ПОЧАСОВКИ</item>
+
+    </string-array>
 </resources>
