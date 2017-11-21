@@ -70,7 +70,6 @@ public class ButtonClick extends AppCompatActivity implements View.OnClickListen
         btnShow1.setOnClickListener(this);
         btnLogOut.setOnClickListener(this);
         userText = (TextView) findViewById(R.id.userText);
-        seekText = (TextView) findViewById(R.id.seekText);
         SharedPreferences pref = getApplicationContext().getSharedPreferences("GasMyasPref", 0);
         token = pref.getString("accessToken", null);
 //        Log.e("Lol kek", token);
